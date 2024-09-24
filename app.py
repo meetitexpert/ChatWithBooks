@@ -1,6 +1,5 @@
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
-import docx  # To handle DOCX files
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -27,13 +26,6 @@ def process_pdf(file):
     loader = PyPDFLoader(file)
     docs = loader.load()
     return docs
-
-def process_docx(file):
-    doc = docx.Document(file)
-    texts = []
-    for i, paragraph in enumerate(doc.paragraphs):
-        texts.append({"text": paragraph.text, "source": file.name, "page": i + 1})
-    return texts
 
 
 def get_text_chunks(text):
